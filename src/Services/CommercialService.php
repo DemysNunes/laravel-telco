@@ -303,11 +303,11 @@ readonly class CommercialService
             ]);
     }
 
-    public function acceptContract(int $contractId): Collection
+    public function acceptContract(int $contractId, ?string $complement = null): Collection
     {
         return $this->http
             ->withUrlParameters(['contractId' => $contractId])
-            ->get('ws/comercial/contratos/aceite/{contractId}')
+            ->post('ws/comercial/contratos/aceite/{contractId}', array_filter(['complemento' => $complement]))
             ->collect();
     }
 
